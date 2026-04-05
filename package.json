@@ -1,0 +1,26 @@
+{
+  "name": "broker-management",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Broker Pro — gestão com Supabase",
+  "main": "server/index.js",
+  "workspaces": [
+    "client"
+  ],
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "concurrently -n server,web -c blue,magenta \"node server/index.js\" \"npm run dev -w client\"",
+    "build": "npm run build -w client",
+    "dev:server": "node server/index.js",
+    "dev:client": "npm run dev -w client"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

@@ -1,0 +1,15 @@
+node_modules/
+.env
+**/.env
+!**/.env.example
+data/
+
+# SQL Supabase local (setup versionado em scripts/)
+/supabase/
+# Nunca versionar seeds ou SQL com credenciais
+scripts/*seed*.sql
+**/supabase_seed*.sql
+*.db
+.DS_Store
+client/dist/
+dist/

@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  @apply bg-hz-cream text-hz-ink antialiased;
+}
+
+html.dark body {
+  @apply bg-neutral-950 text-neutral-100;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Foco visível para teclado em controlos que muitas vezes não têm ring próprio */
+@layer base {
+  :where(a, button, summary):focus {
+    outline: none;
+  }
+  :where(a, button, summary):focus-visible {
+    @apply outline-none ring-2 ring-offset-2 ring-hz-green/70 dark:ring-emerald-400/80;
+    @apply ring-offset-hz-cream dark:ring-offset-neutral-950;
+  }
+  :where(input:not([type='hidden']), select, textarea):focus-visible {
+    outline: 2px solid #3d5c45;
+    outline-offset: 2px;
+  }
+  html.dark :where(input:not([type='hidden']), select, textarea):focus-visible {
+    outline-color: #34d399;
+  }
+}
+
+/** “Saltar para o conteúdo” — só visível com foco por teclado */
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip-link:focus {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0.75rem 1rem;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  border-radius: 0.75rem;
+  font-weight: 700;
+  background: #fff;
+  color: #1a1a1a;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.15),
+    0 0 0 2px #3d5c45;
+}
+html.dark .skip-link:focus {
+  background: #171717;
+  color: #fafafa;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.4),
+    0 0 0 2px #34d399;
+}
+
+@layer utilities {
+  .active-tab {
+    color: #b8a952;
+    border-top: 3px solid #b8a952;
+  }
+  .dark .active-tab {
+    color: #d4c96a;
+    border-top-color: #d4c96a;
+  }
+  .active-tab-hz {
+    color: #3d5c45;
+    border-top: 3px solid #3d5c45;
+  }
+  .dark .active-tab-hz {
+    color: #6ee7b7;
+    border-top-color: #6ee7b7;
+  }
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+  }
+  .safe-pb {
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  #print-area-root {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    padding: 2cm !important;
+    box-shadow: none !important;
+    border: 1px solid #eee !important;
+  }
+  .print-border {
+    border: 2px solid #b8a952 !important;
+    border-radius: 20px !important;
+    padding: 40px !important;
+  }
+}
